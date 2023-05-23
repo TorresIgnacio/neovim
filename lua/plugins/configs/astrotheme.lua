@@ -5,8 +5,10 @@ return function(_, _)
     highlights = {
       global = {             -- Add or modify hl groups globaly, theme specific hl groups take priority.
         modify_hl_groups = function(hl, c)
-          hl.PluginColor4 = {fg = c.my_grey, bg = c.none }
           hl.Normal.bg = c.none
+          hl.NormalNC.bg = c.none
+          hl.NeoTreeNormal.bg = c.none
+          hl.NeoTreeNormalNC.bg = c.none
         end,
       },
     },
