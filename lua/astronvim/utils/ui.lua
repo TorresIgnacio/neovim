@@ -60,6 +60,15 @@ function M.toggle_background()
   ui_notify(string.format("background=%s", vim.go.background))
 end
 
+-- Make background transparent
+function M.remove_background()
+  vim.api.nvim_command("hi Normal guibg=none<CR>")
+  vim.api.nvim_command("hi NormalNC guibg=none<CR>")
+  vim.api.nvim_command("hi NeoTreeNormal guibg=none<CR>")
+  vim.api.nvim_command("hi NeoTreeNormalNC guibg=none<CR>")
+  ui_notify(string.format("background=transparent", vim.go.background))
+end
+
 --- Toggle cmp entrirely
 function M.toggle_cmp()
   vim.g.cmp_enabled = not vim.g.cmp_enabled
@@ -150,16 +159,16 @@ function M.set_indent()
     if not indent or indent == 0 then return end
     vim.bo.expandtab = (indent > 0) -- local to buffer
     indent = math.abs(indent)
-    vim.bo.tabstop = indent -- local to buffer
-    vim.bo.softtabstop = indent -- local to buffer
-    vim.bo.shiftwidth = indent -- local to buffer
+    vim.bo.tabstop = indent         -- local to buffer
+    vim.bo.softtabstop = indent     -- local to buffer
+    vim.bo.shiftwidth = indent      -- local to buffer
     ui_notify(string.format("indent=%d %s", indent, vim.bo.expandtab and "expandtab" or "noexpandtab"))
   end
 end
 
 --- Change the number display modes
 function M.change_number()
-  local number = vim.wo.number -- local to window
+  local number = vim.wo.number                 -- local to window
   local relativenumber = vim.wo.relativenumber -- local to window
   if not number and not relativenumber then
     vim.wo.number = true
@@ -196,7 +205,7 @@ function M.toggle_syntax()
   local ts_avail, parsers = pcall(require, "nvim-treesitter.parsers")
   if vim.g.syntax_on then -- global var for on//off
     if ts_avail and parsers.has_parser() then vim.cmd.TSBufDisable "highlight" end
-    vim.cmd.syntax "off" -- set vim.g.syntax_on = false
+    vim.cmd.syntax "off"  -- set vim.g.syntax_on = false
   else
     if ts_avail and parsers.has_parser() then vim.cmd.TSBufEnable "highlight" end
     vim.cmd.syntax "on" -- set vim.g.syntax_on = true

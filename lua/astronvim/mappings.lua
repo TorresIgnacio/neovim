@@ -421,6 +421,7 @@ maps.n["<leader>u"] = sections.u
 -- Custom menu for modification of the user experience
 if is_available "nvim-autopairs" then maps.n["<leader>ua"] = { ui.toggle_autopairs, desc = "Toggle autopairs" } end
 maps.n["<leader>ub"] = { ui.toggle_background, desc = "Toggle background" }
+maps.n["<leader>uB"] = { ui.remove_background, desc = "Make background transparent" }
 if is_available "nvim-cmp" then maps.n["<leader>uc"] = { ui.toggle_cmp, desc = "Toggle autocompletion" } end
 if is_available "nvim-colorizer.lua" then
   maps.n["<leader>uC"] = { "<cmd>ColorizerToggle<cr>", desc = "Toggle color highlight" }
