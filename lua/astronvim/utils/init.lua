@@ -258,7 +258,7 @@ end
 
 --- regex used for matching a valid URL/URI string
 local url_matcher =
-  "\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
+"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
 
 --- Delete the syntax matching rules for URLs/URIs if set
 function M.delete_url_match()
@@ -286,6 +286,43 @@ function M.cmd(cmd, show_error)
     vim.api.nvim_err_writeln("Error running command: " .. cmd .. "\nError message:\n" .. result)
   end
   return success and result:gsub("[\27\155][][()#;?%d]*[A-PRZcf-ntqry=><~]", "") or nil
+end
+
+function M.scroll()
+  local current_window = vim.bo.filetype
+  local nvim_input = vim.api.nvim_feedkeys
+
+  if current_window == "neo-tree" then
+    nvim_input("j", "n", true)
+    return
+  end
+
+  local line = vim.fn.line
+  local key = vim.api.nvim_replace_termcodes("<C-e>", true, false, true)
+  -- what count was given with j? defaults to 1 (e.g. 10j to move 10 lines
+  -- down, j the same as 1j)
+  local count1 = vim.v.count1
+  -- how far from the end of the file is the current cursor position?
+  local distance = line("$") - line(".")
+  -- if the number of times j should be pressed is greater than the number of
+  -- lines until the bottom of the file
+  if count1 > distance then
+    -- if the cursor isn't on the last line already
+    if distance > 0 then
+      -- press j to get to the bottom of the file
+      nvim_input(distance .. "j", "n", true)
+    end
+    -- then press Ctrl+E for the rest of the count
+    nvim_input((count1 - distance) .. key, "n", true)
+    -- if the count is smaller and the cursor isn't on the last line
+  elseif distance > 8 then
+    -- press j as much as requested
+    nvim_input(count1 .. "j", "n", true)
+  else
+    -- otherwise press Ctrl+E the requested number of times
+    nvim_input(count1 .. "j", "n", true)
+    nvim_input(count1 .. key, "n", true)
+  end
 end
 
 return M

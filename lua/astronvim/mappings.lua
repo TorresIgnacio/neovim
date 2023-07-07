@@ -42,6 +42,11 @@ maps.v["<leader>y"] = { "ygv<Esc>", desc = "yank selection and return cursor to 
 maps.v["J"] = { ":m '>+1<CR><CR>gv=gv", desc = "Move lines down" }
 maps.v["K"] = { ":m '<-2<CR><CR>gv=gv", desc = "Move lines up" }
 
+maps.n["j"] = {
+  function() utils.scroll() end,
+  desc = "continue scrolling past end of file with j"
+}
+
 -- Plugin Manager
 maps.n["<leader>p"] = sections.p
 maps.n["<leader>pi"] = { function() require("lazy").install() end, desc = "Plugins Install" }
