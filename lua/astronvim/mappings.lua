@@ -37,6 +37,7 @@ maps.n["n"] = { "nzzzv", desc = "Next search result centered" }
 maps.n["N"] = { "Nzzzv", desc = "Previous search result centered" }
 maps.n["<leader>s"] = { [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], desc = "Replace word under cursor" }
 maps.v["<leader>p"] = { "\"_dP", desc = "Paste over selection without yanking selection" }
+maps.v["<leader>y"] = { "ygv<Esc>", desc = "yank selection and return cursor to select position" }
 
 maps.v["J"] = { ":m '>+1<CR><CR>gv=gv", desc = "Move lines down" }
 maps.v["K"] = { ":m '<-2<CR><CR>gv=gv", desc = "Move lines up" }
