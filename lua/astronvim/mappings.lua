@@ -47,6 +47,9 @@ maps.n["j"] = {
   desc = "continue scrolling past end of file with j"
 }
 
+maps.t["<C-n>"] = { [[<C-\><C-n>]], desc = "Switch to normal mode in terminal" }
+
+
 -- Plugin Manager
 maps.n["<leader>p"] = sections.p
 maps.n["<leader>pi"] = { function() require("lazy").install() end, desc = "Plugins Install" }
