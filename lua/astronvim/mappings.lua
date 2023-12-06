@@ -459,4 +459,9 @@ if is_available "colortils.nvim" then
   maps.n["<leader>Pc"] = { "<cmd>Colortils css list<cr>", desc = "Open color picker css list" }
 end
 
+--UndoTree
+if is_available "undotree" then
+  maps.n["<leader>uU"] = { "<cmd>UndotreeToggle<cr>", desc = "Toggle undo tree" }
+end
+
 utils.set_mappings(astronvim.user_opts("mappings", maps))

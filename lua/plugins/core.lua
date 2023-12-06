@@ -131,4 +131,22 @@ return {
       })
     end
   },
+  {
+    "stevedylandev/flexoki-nvim",
+    name = 'flexoki',
+    lazy = false,
+    priority = 1000
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    priority = 1000,
+    config = true,
+
+  },
+  {
+    "mbbill/undotree",
+    lazy = false,
+    priority = 1000
+  }
 }
