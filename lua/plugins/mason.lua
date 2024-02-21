@@ -7,7 +7,7 @@ return {
       "MasonUninstall",
       "MasonUninstallAll",
       "MasonLog",
-      "MasonUpdate", -- AstroNvim extension here as well
+      "MasonUpdate",    -- AstroNvim extension here as well
       "MasonUpdateAll", -- AstroNvim specific
     },
     opts = {
@@ -18,6 +18,10 @@ return {
           package_pending = "⟳",
         },
       },
+      ensure_installed = {
+        "debugpy",
+        "pyright",
+      }
     },
     build = ":MasonUpdate",
     config = require "plugins.configs.mason",

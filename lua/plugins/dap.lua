@@ -1,18 +1,39 @@
 return {
-  "mfussenegger/nvim-dap",
-  enabled = vim.fn.has "win32" == 0,
-  dependencies = {
-    {
-      "jay-babu/mason-nvim-dap.nvim",
-      dependencies = { "nvim-dap" },
-      cmd = { "DapInstall", "DapUninstall" },
-      opts = { handlers = {} },
+  {
+    "mfussenegger/nvim-dap",
+    --enabled = vim.fn.has "win32" == 0,
+    dependencies = {
+      {
+        "jay-babu/mason-nvim-dap.nvim",
+        dependencies = { "nvim-dap" },
+        cmd = { "DapInstall", "DapUninstall" },
+        opts = { handlers = {} },
+      },
+      {
+        "rcarriga/nvim-dap-ui",
+        opts = { floating = { border = "rounded" } },
+        config = require "plugins.configs.nvim-dap-ui",
+      },
     },
-    {
-      "rcarriga/nvim-dap-ui",
-      opts = { floating = { border = "rounded" } },
-      config = require "plugins.configs.nvim-dap-ui",
-    },
+    event = "User AstroFile",
   },
-  event = "User AstroFile",
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function(_, opts)
+      --local path = "C:\\Users\\igtorres\\AppData\\Local\\nvim-data\\mason\\packages\\debugpy\\venv\\Scripts\\python"
+      local path = "C:\\Users\\igtorres\\AppData\\Local\\nvim-data\\.virtualenvs\\debugpy\\Scripts\\python"
+      require("dap-python").setup(path)
+      table.insert(require('dap').configurations.python, {
+        type = 'python',
+        request = 'launch',
+        name = 'My custom launch configuration',
+        program = '${file}',
+        justMyCode = "false",
+      })
+    end,
+  }
 }

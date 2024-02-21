@@ -341,7 +341,18 @@ if is_available "toggleterm.nvim" then
     maps.n["<leader>tt"] = { function() utils.toggle_term_cmd "btm" end, desc = "ToggleTerm btm" }
   end
   local python = vim.fn.executable "python" == 1 and "python" or vim.fn.executable "python3" == 1 and "python3"
-  if python then maps.n["<leader>tp"] = { function() utils.toggle_term_cmd(python) end, desc = "ToggleTerm python" } end
+  if python then
+    maps.n["<leader>tp"] = {
+      function()
+        utils.toggle_term_cmd("ipython -i C:\\Users\\igtorres\\AppData\\Local\\nvim-data\\file_editor.py " ..
+          vim.fn.expand('%:p'))
+      end,
+      desc = "ToggleTerm python"
+    }
+  end
+  if vim.fn.executable "git" ==1 then
+    maps.n["<leader>tb"] = { function() utils.toggle_term_cmd("git-bash") end, desc = "ToggleTerm git bash"}
+  end
   maps.n["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float" }
   maps.n["<leader>th"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" }
   maps.n["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "ToggleTerm vertical split" }
