@@ -49,6 +49,9 @@ maps.n["j"] = {
 
 maps.t["<C-n>"] = { [[<C-\><C-n>]], desc = "Switch to normal mode in terminal" }
 
+maps.n["vaa"] = { "ggVG", desc = "Select all" }
+maps.n["yaa"] = { "ggVGy", desc = "Copy all" }
+
 
 -- Plugin Manager
 maps.n["<leader>p"] = sections.p
@@ -350,8 +353,8 @@ if is_available "toggleterm.nvim" then
       desc = "ToggleTerm python"
     }
   end
-  if vim.fn.executable "git" ==1 then
-    maps.n["<leader>tb"] = { function() utils.toggle_term_cmd("git-bash") end, desc = "ToggleTerm git bash"}
+  if vim.fn.executable "git" == 1 then
+    maps.n["<leader>tb"] = { function() utils.toggle_term_cmd("git-bash") end, desc = "ToggleTerm git bash" }
   end
   maps.n["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float" }
   maps.n["<leader>th"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" }

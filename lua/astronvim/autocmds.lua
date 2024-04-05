@@ -123,7 +123,7 @@ autocmd("BufEnter", {
         -- If any visible windows are not sidebars, early return
         if not sidebar_fts[filetype] then
           return
-        -- If the visible window is a sidebar
+          -- If the visible window is a sidebar
         else
           -- only count filetypes once, so remove a found sidebar from the detection
           sidebar_fts[filetype] = nil
@@ -145,17 +145,17 @@ if is_available "alpha-nvim" then
     group = group_name,
     callback = function(event)
       if
-        (
-          (event.event == "User" and event.file == "AlphaReady")
-          or (event.event == "BufEnter" and vim.api.nvim_get_option_value("filetype", { buf = event.buf }) == "alpha")
-        ) and not vim.g.before_alpha
+          (
+            (event.event == "User" and event.file == "AlphaReady")
+            or (event.event == "BufEnter" and vim.api.nvim_get_option_value("filetype", { buf = event.buf }) == "alpha")
+          ) and not vim.g.before_alpha
       then
         vim.g.before_alpha = { showtabline = vim.opt.showtabline:get(), laststatus = vim.opt.laststatus:get() }
         vim.opt.showtabline, vim.opt.laststatus = 0, 0
       elseif
-        vim.g.before_alpha
-        and event.event == "BufEnter"
-        and vim.api.nvim_get_option_value("buftype", { buf = event.buf }) ~= "nofile"
+          vim.g.before_alpha
+          and event.event == "BufEnter"
+          and vim.api.nvim_get_option_value("buftype", { buf = event.buf }) ~= "nofile"
       then
         vim.opt.laststatus, vim.opt.showtabline = vim.g.before_alpha.laststatus, vim.g.before_alpha.showtabline
         vim.g.before_alpha = nil
@@ -255,3 +255,28 @@ cmd("AstroRollback", function() require("astronvim.utils.updater").rollback() en
 cmd("AstroUpdate", function() require("astronvim.utils.updater").update() end, { desc = "Update AstroNvim" })
 cmd("AstroVersion", function() require("astronvim.utils.updater").version() end, { desc = "Check AstroNvim Version" })
 cmd("AstroReload", function() require("astronvim.utils").reload() end, { desc = "Reload AstroNvim (Experimental)" })
+
+local cursor_color_group = augroup("cursor_color", { clear = true })
+local colorscheme
+autocmd("FocusLost", {
+  desc = "Change cursor appearance when neovim window loses focus",
+  group = cursor_color_group,
+  callback = function()
+    colorscheme = vim.g.colors_name
+    vim.o.guicursor = "a:hor10"
+    vim.cmd("hi Normal guibg=#666666")
+    vim.cmd("hi NormalNC guibg=#666666")
+    vim.cmd("hi NeoTreeNormal guibg=#666666")
+    vim.cmd("hi NeoTreeNormalNC guibg=#666666")
+  end
+})
+autocmd("FocusGained", {
+  desc = "Change cursor appearance when neovim window gains focus",
+  group = cursor_color_group,
+  callback = function()
+    vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+    -- vim.cmd("colorscheme " .. colorscheme)
+    -- vim.cmd("colorscheme kanagawa")
+    vim.api.nvim_command("colorscheme " .. colorscheme)
+  end
+})
