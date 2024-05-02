@@ -144,6 +144,15 @@ return {
     config = true,
 
   },
+  { "savq/melange-nvim" },
+  {
+        'AlexvZyl/nordic.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+        require 'nordic' .load()
+    end
+  },
   {
     "mbbill/undotree",
     lazy = false,
