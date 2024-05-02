@@ -2,7 +2,7 @@ local utils = require "astronvim.utils"
 local is_available = utils.is_available
 local ui = require "astronvim.utils.ui"
 
-local maps = { i = {}, n = {}, v = {}, t = {} }
+local maps = { i = {}, n = {}, v = {}, t = {}, c={} }
 
 local sections = {
   f = { desc = "󰍉 Find" },
@@ -48,6 +48,8 @@ maps.n["j"] = {
 }
 
 maps.t["<C-n>"] = { [[<C-\><C-n>]], desc = "Switch to normal mode in terminal" }
+maps.c['w!!'] = {"<esc>:lua require'astronvim.utils'.sudo_write()<CR>", desc= "Save file with sudo"}
+
 
 
 -- Plugin Manager

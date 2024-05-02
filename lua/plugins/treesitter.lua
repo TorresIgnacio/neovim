@@ -27,7 +27,7 @@ return {
     indent = { enable = true },
     autotag = { enable = true },
     clontext_commentstring = { enable = true, enable_autocmd = false },
-    compilers = { "clang" }
+    compilers = { "gcc", "clang" }
   },
   config = require "plugins.configs.nvim-treesitter",
 }
