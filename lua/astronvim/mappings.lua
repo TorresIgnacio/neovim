@@ -24,11 +24,8 @@ if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.desc = opts.desc
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
-maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
 maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
 maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
-maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
-maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
 maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
 maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
 maps.n["<C-d>"] = { "<C-d>zz", desc = "Half page down centered" }
@@ -42,10 +39,6 @@ maps.v["<leader>y"] = { "ygv<Esc>", desc = "yank selection and return cursor to 
 maps.v["J"] = { ":m '>+1<CR><CR>gv=gv", desc = "Move lines down" }
 maps.v["K"] = { ":m '<-2<CR><CR>gv=gv", desc = "Move lines up" }
 
-maps.n["j"] = {
-  function() utils.scroll() end,
-  desc = "continue scrolling past end of file with j"
-}
 
 maps.t["<C-n>"] = { [[<C-\><C-n>]], desc = "Switch to normal mode in terminal" }
 maps.c['w!!'] = {"<esc>:lua require'astronvim.utils'.sudo_write()<CR>", desc= "Save file with sudo"}
@@ -54,6 +47,7 @@ maps.c['w!!'] = {"<esc>:lua require'astronvim.utils'.sudo_write()<CR>", desc= "S
 maps.n["vaa"] = { "ggVG", desc = "Select all" }
 maps.n["yaa"] = { "ggVGy", desc = "Copy all" }
 
+maps.n["<leader>q"] = { "@", desc = "Run macro" } 
 
 -- Plugin Manager
 maps.n["<leader>p"] = sections.p

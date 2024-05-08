@@ -255,28 +255,3 @@ cmd("AstroRollback", function() require("astronvim.utils.updater").rollback() en
 cmd("AstroUpdate", function() require("astronvim.utils.updater").update() end, { desc = "Update AstroNvim" })
 cmd("AstroVersion", function() require("astronvim.utils.updater").version() end, { desc = "Check AstroNvim Version" })
 cmd("AstroReload", function() require("astronvim.utils").reload() end, { desc = "Reload AstroNvim (Experimental)" })
-
-local cursor_color_group = augroup("cursor_color", { clear = true })
-local colorscheme
-autocmd("FocusLost", {
-  desc = "Change cursor appearance when neovim window loses focus",
-  group = cursor_color_group,
-  callback = function()
-    colorscheme = vim.g.colors_name
-    vim.o.guicursor = "a:hor10"
-    vim.cmd("hi Normal guibg=#666666")
-    vim.cmd("hi NormalNC guibg=#666666")
-    vim.cmd("hi NeoTreeNormal guibg=#666666")
-    vim.cmd("hi NeoTreeNormalNC guibg=#666666")
-  end
-})
-autocmd("FocusGained", {
-  desc = "Change cursor appearance when neovim window gains focus",
-  group = cursor_color_group,
-  callback = function()
-    vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-    -- vim.cmd("colorscheme " .. colorscheme)
-    -- vim.cmd("colorscheme kanagawa")
-    vim.api.nvim_command("colorscheme " .. colorscheme)
-  end
-})

@@ -146,16 +146,17 @@ return {
   },
   { "savq/melange-nvim" },
   {
-        'AlexvZyl/nordic.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function()
-        require 'nordic' .load()
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require 'nordic'.load()
     end
   },
   {
     "mbbill/undotree",
     lazy = false,
     priority = 1000
-  }
+  },
+  { "catppuccin/nvim", lazy = false, name = "catppuccin", priority = 1000 }
 }
