@@ -163,8 +163,6 @@ end
 -- GitSigns
 if is_available "gitsigns.nvim" then
   maps.n["<leader>g"] = sections.g
-  maps.n["]g"] = { function() require("gitsigns").next_hunk() end, desc = "Next Git hunk" }
-  maps.n["[g"] = { function() require("gitsigns").prev_hunk() end, desc = "Previous Git hunk" }
   maps.n["<leader>gl"] = { function() require("gitsigns").blame_line() end, desc = "View Git blame" }
   maps.n["<leader>gL"] = { function() require("gitsigns").blame_line { full = true } end, desc = "View full Git blame" }
   maps.n["<leader>gp"] = { function() require("gitsigns").preview_hunk() end, desc = "Preview Git hunk" }
@@ -177,7 +175,11 @@ end
 
 if is_available "fugitive.nvim" then
   maps.n["<leader>g"] = sections.g
+  maps.n["<leader>gdd"] = { "<cmd>Gvsplitdiff!<cr>", desc = "git 3 way diff vertical split" }
+  maps.n["<leader>gdg"] = { "<cmd>diffget<cr>", desc = "git diffget" }
   maps.n["<leader>gdp"] = { "<cmd>:diffput<cr>", desc = "git diffput" }
+  maps.n["<leader>gj"] = { "]c", desc = "next git hunk" }
+  maps.n["<leader>gk"] = { "[c", desc = "previous git hunk" }
 end
 
 -- NeoTree
