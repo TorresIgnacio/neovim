@@ -25,7 +25,8 @@ return {
     },
     config = function(_, opts)
       --local path = "C:\\Users\\igtorres\\AppData\\Local\\nvim-data\\mason\\packages\\debugpy\\venv\\Scripts\\python"
-      local path = "C:\\Users\\igtorres\\AppData\\Local\\nvim-data\\.virtualenvs\\debugpy\\Scripts\\python"
+      -- local path = "C:\\Users\\igtorres\\AppData\\Local\\nvim-data\\.virtualenvs\\debugpy\\Scripts\\python"
+      local path = "/home/igtorres/.local/share/nvim/mason/packages/debugpy/venv/bin/python3.10"
       require("dap-python").setup(path)
       table.insert(require('dap').configurations.python, {
         type = 'python',
@@ -39,7 +40,7 @@ return {
         request = 'launch',
         name = 'Django',
         program = vim.fn.getcwd() .. '/manage.py',
-        args = {'runserver', '--noreload'},
+        args = { 'runserver', '--noreload' },
       })
     end,
   }

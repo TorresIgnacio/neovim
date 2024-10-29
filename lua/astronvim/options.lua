@@ -43,7 +43,7 @@ local options = astronvim.user_opts("options", {
     termguicolors = true,                                   -- Enable 24-bit RGB color in the TUI
     timeoutlen = 500,                                       -- Shorten key timeout length a little bit for which-key
     undofile = true,                                        -- Enable persistent undo
-    updatetime = 300,                                       -- Length of time to wait before triggering the plugin
+    updatetime = 100,                                       -- Length of time to wait before triggering the plugin
     virtualedit = "block",                                  -- allow going past end of line in visual block mode
     wrap = true,                                            -- Disable wrapping of lines longer than the width of window
     writebackup = false,                                    -- Disable making a backup before overwriting a file
@@ -58,7 +58,7 @@ local options = astronvim.user_opts("options", {
     autopairs_enabled = true,                                           -- enable autopairs at start
     diagnostics_mode = 3,                                               -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
     icons_enabled = true,                                               -- disable icons in the UI (disable if no nerd font is available)
-    ui_notifications_enabled = true,                                    -- disable notifications when toggling UI elements
+    ui_notifications_enabled = false,                                   -- disable notifications when toggling UI elements
   },
   t = vim.t.bufs and vim.t.bufs or { bufs = vim.api.nvim_list_bufs() }, -- initialize buffers for the current tab
 })

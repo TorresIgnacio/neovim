@@ -2,7 +2,7 @@ local utils = require "astronvim.utils"
 local is_available = utils.is_available
 local ui = require "astronvim.utils.ui"
 
-local maps = { i = {}, n = {}, v = {}, t = {}, c={} }
+local maps = { i = {}, n = {}, v = {}, t = {}, c = {} }
 
 local sections = {
   f = { desc = "󰍉 Find" },
@@ -13,6 +13,7 @@ local sections = {
   bs = { desc = "󰒺 Sort Buffers" },
   d = { desc = " Debugger" },
   g = { desc = "󰊢 Git" },
+  s = { desc = "⚡ Flash" },
   S = { desc = "󱂬 Session" },
   t = { desc = " Terminal" },
   P = { desc = " Color Picker" },
@@ -21,8 +22,8 @@ if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.desc = opts.desc
 
 -- Normal --
 -- Standard Operations
-maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
-maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
+maps.n["j"] = { "(v:count >= 5 ? \"m'\" . v:count : '') . 'j'", expr = true, desc = "Move cursor down" }
+maps.n["k"] = { "(v:count >= 5 ? \"m'\" . v:count : '') . 'k'", expr = true, desc = "Move cursor up" }
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
 maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
@@ -32,22 +33,20 @@ maps.n["<C-d>"] = { "<C-d>zz", desc = "Half page down centered" }
 maps.n["<C-u>"] = { "<C-u>zz", desc = "Half page up centered" }
 maps.n["n"] = { "nzzzv", desc = "Next search result centered" }
 maps.n["N"] = { "Nzzzv", desc = "Previous search result centered" }
-maps.n["<leader>s"] = { [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], desc = "Replace word under cursor" }
+-- maps.n["<leader>s"] = { [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], desc = "Replace word under cursor" }
 maps.v["<leader>p"] = { "\"_dP", desc = "Paste over selection without yanking selection" }
 maps.v["<leader>y"] = { "ygv<Esc>", desc = "yank selection and return cursor to select position" }
 
 maps.v["J"] = { ":m '>+1<CR><CR>gv=gv", desc = "Move lines down" }
 maps.v["K"] = { ":m '<-2<CR><CR>gv=gv", desc = "Move lines up" }
 
-
 maps.t["<C-n>"] = { [[<C-\><C-n>]], desc = "Switch to normal mode in terminal" }
-maps.c['w!!'] = {"<esc>:lua require'astronvim.utils'.sudo_write()<CR>", desc= "Save file with sudo"}
-
+maps.c['w!!'] = { "<esc>:lua require'astronvim.utils'.sudo_write()<CR>", desc = "Save file with sudo" }
 
 maps.n["vaa"] = { "ggVG", desc = "Select all" }
 maps.n["yaa"] = { "ggVGy", desc = "Copy all" }
 
-maps.n["<leader>q"] = { "@", desc = "Run macro" } 
+maps.n["<leader>q"] = { "@", desc = "Run macro" }
 
 -- Plugin Manager
 maps.n["<leader>p"] = sections.p

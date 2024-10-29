@@ -97,7 +97,6 @@ function M.remove_background()
   -- vim.api.nvim_command("hi AerialGuide guifg="..gray_color.."<CR>")
   -- vim.api.nvim_command("hi IndentBlanklineSpaceChar guifg="..gray_color.."<CR>")
   -- vim.api.nvim_command("hi IndentBlanklineSpaceCharBlankline guifg="..gray_color.."<CR>")
-  ui_notify(string.format("background=transparent", vim.go.background))
 end
 
 --- Toggle cmp entrirely
