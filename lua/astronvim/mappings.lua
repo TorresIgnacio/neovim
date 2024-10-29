@@ -173,7 +173,11 @@ if is_available "gitsigns.nvim" then
   maps.n["<leader>gs"] = { function() require("gitsigns").stage_hunk() end, desc = "Stage Git hunk" }
   maps.n["<leader>gS"] = { function() require("gitsigns").stage_buffer() end, desc = "Stage Git buffer" }
   maps.n["<leader>gu"] = { function() require("gitsigns").undo_stage_hunk() end, desc = "Unstage Git hunk" }
-  maps.n["<leader>gd"] = { function() require("gitsigns").diffthis() end, desc = "View Git diff" }
+end
+
+if is_available "fugitive.nvim" then
+  maps.n["<leader>g"] = sections.g
+  maps.n["<leader>gdp"] = { "<cmd>:diffput<cr>", desc = "git diffput" }
 end
 
 -- NeoTree
@@ -327,7 +331,6 @@ if is_available "toggleterm.nvim" then
   if vim.fn.executable "lazygit" == 1 then
     maps.n["<leader>g"] = sections.g
     maps.n["<leader>gg"] = { function() utils.toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
-    maps.n["<leader>tl"] = { function() utils.toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
   end
   if vim.fn.executable "node" == 1 then
     maps.n["<leader>tn"] = { function() utils.toggle_term_cmd "node" end, desc = "ToggleTerm node" }
