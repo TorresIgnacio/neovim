@@ -16,5 +16,9 @@ return {
   },
   {
     "tpope/vim-fugitive", lazy = false
-  }
+  },
+  {
+    "azabiong/vim-highlighter",
+    lazy = false,
+  },
 }

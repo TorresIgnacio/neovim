@@ -26,12 +26,12 @@ return {
     config = function(_, opts)
       --local path = "C:\\Users\\igtorres\\AppData\\Local\\nvim-data\\mason\\packages\\debugpy\\venv\\Scripts\\python"
       -- local path = "C:\\Users\\igtorres\\AppData\\Local\\nvim-data\\.virtualenvs\\debugpy\\Scripts\\python"
-      local path = "/home/igtorres/.local/share/nvim/mason/packages/debugpy/venv/bin/python3.10"
+      local path = "/home/igtorres/.local/share/nvim/mason/packages/debugpy/venv/bin/python3.12"
       require("dap-python").setup(path)
       table.insert(require('dap').configurations.python, {
         type = 'python',
         request = 'launch',
-        name = 'My custom launch configuration',
+        name = 'Launch file in neovim',
         program = '${file}',
         justMyCode = "false",
       })

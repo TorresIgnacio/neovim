@@ -47,7 +47,7 @@ return {
     event = "User AstroFile",
     opts = {
       attach_mode = "global",
-      backends = { "lsp", "treesitter", "markdown", "man" },
+      backends = { "lsp", "treesitter", "man" },
       layout = { min_width = 28 },
       show_guides = true,
       filter_kind = false,
