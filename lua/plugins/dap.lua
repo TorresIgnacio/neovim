@@ -33,7 +33,7 @@ return {
         request = 'launch',
         name = 'Launch file in neovim',
         program = '${file}',
-        justMyCode = "false",
+        justMyCode = false,
       })
       table.insert(require('dap').configurations.python, {
         type = 'python',
